@@ -7,7 +7,7 @@ def delete_user_from_blacklist(id):
 
 # Удаляет пользователя из избранного
 def delete_user_from_fav(id):
-    current_user = session.query(DatingUser).filter_by(vk_id=id).first()
+    current_user = session.query(Fav_User).filter_by(vk_id=id).first()
     session.delete(current_user)
     session.commit()
 
@@ -20,7 +20,7 @@ def check_db_master(id):
 
 # Проверяет, есть ли пользователь в БД
 def check_db_user(id):
-    dating_user = session.query(DatingUser).filter_by(vk_id=id).first()
+    dating_user = session.query(Fav_User).filter_by(vk_id=id).first()
     blocked_user = session.query(BlackList).filter_by(vk_id=id).first()
     return dating_user, blocked_user
 
@@ -37,7 +37,7 @@ def check_db_black(id):
 def check_db_fav(id):
     current_users_id = session.query(User).filter_by(vk_id=id).first()
     # Находим все анкеты из избранного, которые добавил данный пользователь
-    all_users = session.query(DatingUser).filter_by(user_id=current_users_id.id).all()
+    all_users = session.query(Fav_User).filter_by(user_id=current_users_id.id).all()
     return all_users
 
 
