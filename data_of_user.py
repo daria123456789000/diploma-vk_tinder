@@ -50,14 +50,14 @@ def user_blacklist(id):
         msg_texts, user_id = loop_bot()
         if msg_texts == '0':
             if num >= len(all_users) - 1:
-                write_msg(user_ids, f'Это была последняя анкета.\n'
+                write_msg(user_id, f'Это была последняя анкета.\n'
                                     f'Vkinder - вернуться в меню\n')
         elif msg_texts == '1':
             print(user.id)
             delete_user_from_blacklist(user.vk_id)
             write_msg(user_id, f'Анкета успешно удалена')
             if num >= len(all_users) - 1:
-                write_msg(user_ids, f'Это была последняя анкета.\n'
+                write_msg(user_id, f'Это была последняя анкета.\n'
                                     f'Vkinder - вернуться в меню\n')
 
 
