@@ -1,4 +1,3 @@
-др варик
 from vk_api.longpoll import VkEventType, VkLongPoll
 from tokens import main_token
 
@@ -17,10 +16,8 @@ user_get = user_get[0]
 
 if msg == "Привет!" :
 sender(id, "Привет, Саша!") 
-хня
 
-норм 
-2
+
 from repository.repository import Repository
 from vkbot.vk_bot import VK_Bot
 import vk_api
