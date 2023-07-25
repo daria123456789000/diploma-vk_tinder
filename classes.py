@@ -10,8 +10,8 @@ class Fav_User(Base):
     __tablename__ = 'dating_user'
     id = sq.Column(sq.Integer, primary_key=True, autoincrement=True)
     vk_id = sq.Column(sq.Integer, unique=True)
-    first_name = sq.Column(sq.String)
-    second_name = sq.Column(sq.String)
+    name = sq.Column(sq.String)
+    surname = sq.Column(sq.String)
     city = sq.Column(sq.String)
     link = sq.Column(sq.String)
     id_user = sq.Column(sq.Integer, sq.ForeignKey('user.id', ondelete='CASCADE'))
@@ -21,8 +21,8 @@ class BlackList(Base):
     __tablename__ = 'black_list'
     id = sq.Column(sq.Integer, primary_key=True, autoincrement=True)
     vk_id = sq.Column(sq.Integer, unique=True)
-    first_name = sq.Column(sq.String)
-    second_name = sq.Column(sq.String)
+    name = sq.Column(sq.String)
+    surname = sq.Column(sq.String)
     city = sq.Column(sq.String)
     link = sq.Column(sq.String)
     link_photo = sq.Column(sq.String)
