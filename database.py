@@ -1,41 +1,41 @@
 # Удаляет пользователя из черного списка
-def delete_user_from_blacklist(ids):
-    current_user = session.query(BlackList).filter_by(vk_id=ids).first()
+def delete_user_from_blacklist(id):
+    current_user = session.query(BlackList).filter_by(vk_id=id).first()
     session.delete(current_user)
     session.commit()
 
 
 # Удаляет пользователя из избранного
-def delete_user_from_favorites(ids):
-    current_user = session.query(DatingUser).filter_by(vk_id=ids).first()
+def delete_user_from_fav(id):
+    current_user = session.query(DatingUser).filter_by(vk_id=id).first()
     session.delete(current_user)
     session.commit()
 
 
 # Проверяет, зарегистрирован ли пользователь бота в БД
-def check_db_master(ids):
-    current_user_id = session.query(User).filter_by(vk_id=ids).first()
+def check_db_master(id):
+    current_user_id = session.query(User).filter_by(vk_id=id).first()
     return current_user_id
 
 
 # Проверяет, есть ли пользователь в БД
-def check_db_user(ids):
-    dating_user = session.query(DatingUser).filter_by(vk_id=ids).first()
-    blocked_user = session.query(BlackList).filter_by(vk_id=ids).first()
+def check_db_user(id):
+    dating_user = session.query(DatingUser).filter_by(vk_id=id).first()
+    blocked_user = session.query(BlackList).filter_by(vk_id=id).first()
     return dating_user, blocked_user
 
 
 # Проверяет, есть ли пользователь в черном списке
-def check_db_black(ids):
-    current_users_id = session.query(User).filter_by(vk_id=ids).first()
+def check_db_black(id):
+    current_users_id = session.query(User).filter_by(vk_id=id).first()
     # Находим все анкеты из избранного, которые добавил данный пользователь
     all_users = session.query(BlackList).filter_by(user_id=current_users_id.id).all()
     return all_users
 
 
 # Проверяет, есть ли пользователь в избранном
-def check_db_favorites(ids):
-    current_users_id = session.query(User).filter_by(vk_id=ids).first()
+def check_db_fav(id):
+    current_users_id = session.query(User).filter_by(vk_id=id).first()
     # Находим все анкеты из избранного, которые добавил данный пользователь
     all_users = session.query(DatingUser).filter_by(user_id=current_users_id.id).all()
     return all_users
@@ -62,7 +62,7 @@ def register_user(vk_id):
 
 
 # Сохранение выбранного пользователя в БД
-def add_user_to_favorites(event_id, vk_id, first_name, second_name, city, link, id_user):
+def add_user_to_fav(event_id, vk_id, name, surname, city, link, id_user):
     try:
         new_user = DatingUser(
             vk_id=vk_id,
