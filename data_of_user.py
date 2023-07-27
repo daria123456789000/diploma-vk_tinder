@@ -45,6 +45,7 @@ if __name__ == '__main__':
                             if self_id == event.obj.message["from_id"]:
                                if event.obj.message["text"].lower() == "дальше":
                                break
+                                    
                                 
 def user_blacklist(id):
     all_users = check_db_black(id)
@@ -52,6 +53,19 @@ def user_blacklist(id):
     for num, user in enumerate(all_users):
         write_msg(id, f'{user.name}, {user.surname}, {user.link}')
         write_msg(id, '1 - Удалить из черного списка, 0 - Далее \nq - Выход')
+            def go_to_blacklist(id):
+    all_users = check_db_black(id)
+        # Удаляем запись из бд - черный список
+        if msg_texts == '1':
+            print(user.id)
+            delete_user_from_blacklist(user.vk_id)
+            write_msg(user_ids, f'Анкета успешно удалена')
+            if num >= len(all_users) - 1:
+                write_msg(user_ids, f'Это была последняя анкета.\n'
+                                    f'Vkinder - вернуться в меню\n')
+        elif msg_texts.lower() == 'q':
+            write_msg(ids, 'Vkinder - для активации бота.')
+            break
 
 
 def add_user_to_blacklist(event_id, vk_id, first_name, second_name, city, link, link_photo, count_likes, id_user):
@@ -87,11 +101,12 @@ def add_user_to_blacklist(event_id, vk_id, first_name, second_name, city, link, 
             if num >= len(all_users) - 1:
                 write_msg(user_id, f'Это последняя анкета\n'
                                     f'Vkinder - вернуться в меню\n')
-
-
-
-    if not user_list:
-        vk.send_message(vk.vk_group_session, self_id, "Вам пары не нашлось, попробуйте скорректировать свои "
+        elif msg_texts.lower() == 'q':
+            write_msg(ids, 'Vkinder - для активации бота.')
+            break
+                
+  if not user_list:
+        vk.send_message(vk.vk_group_session, self_id, "Вам пары не нашлось, проверьте свои "
                                                       "данные.\Возможно, неверно указан город в личном профиле?",
                         keyboard=welcome_keyboard.get_keyboard())
         user_dict[self_id] = 1
