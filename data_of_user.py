@@ -99,3 +99,7 @@ def add_user_to_blacklist(event_id, vk_id, first_name, second_name, city, link, 
        elif msg_texts.lower() == 'q':
             write_msg(id, 'Vkinder для активации бота')
             break
+
+
+if __name__ == "__main__":
+    main()
