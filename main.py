@@ -11,7 +11,7 @@ if event.to_me:
 vk = vk_session.get_api()
 msg = event.text.lower()
 id = event.user_id
-user_get = vk.users.get(user_ids =id)
+user_get = vk.users.get(user_id =id)
 user_get = user_get[0]
 
 if msg == "Привет!" :
