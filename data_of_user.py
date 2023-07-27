@@ -40,7 +40,12 @@ if __name__ == '__main__':
                             write_msg(user_id, f'фото:',
                                       attachment=sorted_user_photo[photo][1])
 
-
+                     for event in vk.longpoll.listen():
+                         if event.type == VkBotEventType.MESSAGE_NEW:
+                            if self_id == event.obj.message["from_id"]:
+                               if event.obj.message["text"].lower() == "дальше":
+                               break
+                                
 def user_blacklist(id):
     all_users = check_db_black(id)
     write_msg(id, f'Анкеты в черном списке:')
@@ -63,8 +68,8 @@ def user_blacklist(id):
 
 
     if not user_list:
-        vk.send_message(vk.vk_group_session, self_id, "Тебе пары не нашлось, попробуй скорректировать свои "
-                                                      "данные.\nМожет ты не указал свой город в личном профиле?",
+        vk.send_message(vk.vk_group_session, self_id, "Тебе пары не нашлось, попробуйте скорректировать свои "
+                                                      "данные.\Возможно неверно указан город в личном профиле?",
                         keyboard=welcome_keyboard.get_keyboard())
         user_dict[self_id] = 1
         return
