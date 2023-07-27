@@ -107,18 +107,13 @@ def event_handler(self):
                             self.params, self.offset)
 
                         worksheet = self.worksheets.pop()
-                        
-'добавление анкеты в бд согласно event.user_id'
-
                 elif event.text.lower() == 'пока':
                     self.message_send(
                         event.user_id, 'До скорой встречи')
                 else:
                     self.message_send(
                         event.user_id, 'Нераспознанная команда')
-
                         
-
 
 #метод получения фото
     def get_photos(self, user_id):
