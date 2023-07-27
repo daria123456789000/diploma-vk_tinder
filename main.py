@@ -179,4 +179,27 @@ def event_handler(self):
         Session = sessionmaker(bind=engine)
         self.db_session = Session()
 
-        
+ for event in vk.longpoll.listen():
+        if event.type == VkBotEventType.MESSAGE_NEW:
+
+            if event.obj.message["from_id"] not in user_dict:
+                vk.send_message(vk.vk_group_session, event.obj.message["from_id"],
+                                text="Для начала работы нажмите начать.",
+                                keyboard=welcome_keyboard.get_keyboard())
+                user_dict[event.obj.message["from_id"]] = 1
+
+            if event.obj.message["text"].lower() == "мои данные" and user_dict[event.obj.message["from_id"]] == 1:
+                self_id = event.obj.message["from_id"]
+                vk.send_message(vk.vk_group_session, event.obj.message["from_id"], text=self_id,
+                                keyboard=welcome_keyboard.get_keyboard())
+
+            elif event.obj.message["text"].lower() == "начать" and user_dict[event.obj.message["from_id"]] == 1:
+                self_id = event.obj.message["from_id"]
+                vk.send_message(vk.vk_group_session, event.obj.message["from_id"], text="Начинаем поиск")
+                user_dict[event.obj.message["from_id"]] = 2
+                inner_listen = Thread(target=listener, args=(self_id, db.session))
+                inner_listen.start()
+
+     
+if __name__ == "__main__":
+    main()
