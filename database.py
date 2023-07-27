@@ -59,7 +59,7 @@ def write_msg(user_id, message, attachment=None):
 
 
 # Регистрация пользователя
-def register_user(vk_id):
+def reg_user(vk_id):
     try:
         new_user = User(vk_id=vk_id)
         session.add(new_user)
@@ -67,6 +67,11 @@ def register_user(vk_id):
         return True
     except (IntegrityError, InvalidRequestError):
         return False
+
+
+def reg_new_user(id_num):
+    write_msg(id_num, 'Вы прошли регистрацию.')
+    register_user(id_num)
 
 
 # Сохранение выбранного пользователя в БД
