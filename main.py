@@ -36,7 +36,7 @@ def main():
     vk_session = vk_api.VkApi(token='token')
     vk = vk_session.get_api()
     response = vk_session.method('users.search', {
-                                 'q': 'Хворостова Саша', 'sex': 0, 'age_from': 2, 'age_to': 35, 'hometown': 'Сибирь'})
+                                 'q': 'Хворостова Саша', 'sex': 2, 'age_from': 2, 'age_to': 35, 'hometown': 'Сибирь'})
     print(response)
     return
 
