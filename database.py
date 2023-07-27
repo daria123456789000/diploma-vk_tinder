@@ -12,6 +12,14 @@ def delete_user_from_fav(id):
     session.commit()
 
 
+#Создает пользователя в бд
+def db_candidate(cand_lst):
+    with db:
+        db.create_tables([VkUsers])
+        data_db = VkUsers.select()
+        id_list = [i.id for i in data_db]
+
+
 # Проверяет, зарегистрирован ли пользователь бота в БД
 def check_db_master(id):
     current_user_id = session.query(User).filter_by(vk_id=id).first()
