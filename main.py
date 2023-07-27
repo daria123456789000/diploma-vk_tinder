@@ -88,12 +88,12 @@ def event_handler(self):
             if event.type == VkEventType.MESSAGE_NEW and event.to_me:
             
                 if event.text.lower() == 'привет':
-                    '''Логика для получения данных о пользователе'''
+                    #Получение данных о пользователе#
                     self.params = self.vk_tools.get_profile_info(event.user_id)
                     self.message_send(
                         event.user_id, f'Привет, {self.params["name"]}! Я робот-помощник. Помогу найти вам пару. Для этого введите команду "ПОИСК" или "S"')
                 elif event.text.lower() == 'поиск' or event.text.lower() == 's':
-                    '''Логика для поиска анкет''' 
+                    #Логика для поиска анкет# 
                     self.message_send(
                         event.user_id, 'Начинаю поиск')
                     if self.worksheets:
@@ -115,7 +115,7 @@ def event_handler(self):
                         event.user_id, 'Нераспознанная команда')
                         
 
-#метод получения фото
+#метод получения фото#
     def get_photos(self, user_id):
     photos_params = {'owner_id': user_id,
                         'album_id': 'profile',
