@@ -2,7 +2,8 @@ if __name__ == '__main__':
         if msg_text == "vkinder":
             menu_bot(user_id)
             msg_text, user_id = loop_bot()
-        
+
+                
             if msg_text.lower() == 'да':
                 reg_new_user(user_id)
             elif len(msg_text) > 1:
@@ -40,11 +41,12 @@ if __name__ == '__main__':
                                write_msg(user_id, f'фото:',
                                          attachment=sorted_user_photo[photo][1])
 
-                     for event in vk.longpoll.listen():
-                         if event.type == VkBotEventType.MESSAGE_NEW:
-                            if self_id == event.obj.message["from_id"]:
-                               if event.obj.message["text"].lower() == "дальше":
-                               break
+                    
+for event in vk.longpoll.listen():
+    if event.type == VkBotEventType.MESSAGE_NEW:
+       if self_id == event.obj.message["from_id"]:
+          if event.obj.message["text"].lower() == "дальше":
+          break
                                     
                                 
 def user_blacklist(id):
