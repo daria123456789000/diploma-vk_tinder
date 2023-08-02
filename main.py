@@ -1,9 +1,11 @@
 from vk_api.longpoll import VkEventType, VkLongPoll
 from tokens import main_token
 
+
 vk_session = vk_api.VkApi(token = main_token)
 session_api = vk_session.get_api()
 longpoll = VkLongPoll(vk_session)
+
 
 for event in longpoll.listen():
 if event.type == VkEventType.MESSAGE_NEW and event.to_me:
@@ -14,15 +16,17 @@ id = event.user_id
 user_get = vk.users.get(user_id =id)
 user_get = user_get[0]
 
+
 if msg == "Привет!" :
 sender(id, "Привет, Саша!") 
-
 
 from repository.repository import Repository
 from vkbot.vk_bot import VK_Bot
 import vk_api
 
+
 import os.path
+
 
 def get_vk_token():
     path = os.path.abspath(os.path.join(
@@ -30,6 +34,7 @@ def get_vk_token():
         
  with open(path, "r") as file:
         return file.read()
+
 
 def main():
     vk_token = get_vk_token()
@@ -40,6 +45,7 @@ def main():
     print(response)
     return
 
+    
     storage = Storage()
     print(storage.get_storage_user())
 
@@ -57,7 +63,8 @@ class VKinder:
     vk_group_session = None
     user_info = {}
 
-    def __init__(self,
+    
+def __init__(self,
                  my_token: str = None,
                  group_token: str = None,
                  user_id: str = None,
@@ -106,6 +113,7 @@ def event_handler(self):
                         self.worksheets = self.vk_tools.search_worksheet(
                             self.params, self.offset)
 
+                        
                         worksheet = self.worksheets.pop()
                 elif event.text.lower() == 'пока':
                     self.message_send(
@@ -116,7 +124,7 @@ def event_handler(self):
                         
 
 #метод получения фото#
-    def get_photos(self, user_id):
+def get_photos(self, user_id):
     photos_params = {'owner_id': user_id,
                         'album_id': 'profile',
                         'rev': '1',
@@ -165,7 +173,7 @@ def event_handler(self):
         results_to_save = search_result["items"]
         
 
-        def _database_auth(self):
+def _database_auth(self):
         DSN = f"postgresql://{self.db_login}:{self.db_password}@localhost:{self.db_localhost}/{self.db_name}"
         engine = sq.create_engine(DSN)
 
@@ -173,6 +181,7 @@ def event_handler(self):
 
         Session = sessionmaker(bind=engine)
         self.db_session = Session()
+
 
  for event in vk.longpoll.listen():
         if event.type == VkBotEventType.MESSAGE_NEW:
