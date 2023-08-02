@@ -95,6 +95,7 @@ def add_user_to_fav(event_id, vk_id, name, surname, city, link, id_user):
                   'Пользователь уже в избранном.')
         return False
 
+
 # Сохранение в БД фото добавленного пользователя
 def add_user_photos(event_id, link_photo, count_likes, id_dating_user):
     try:
